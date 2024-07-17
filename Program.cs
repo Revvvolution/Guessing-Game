@@ -6,8 +6,9 @@ namespace NumberGuessingGame
     {
         static void Main(string[] args)
         {
-            // Store a secret number
-            int secretNumber = 42;
+            // Store a secret number (randomized with each execution of the program)
+            Random randomInt = new Random();
+            int secretNumber = randomInt.Next(1,101);
 
             // Display a message to the user
             Console.WriteLine("\t\t\t -------------------------\n\t\t\t   Number Guessing Game!  \n\t\t\t -------------------------");
@@ -17,8 +18,12 @@ namespace NumberGuessingGame
             // Give the user four chances to guess the number.
             for (int i=0; i<4; i++)
             {
+
                 // Display the number of the user's current guess
                 Console.WriteLine($"\t\t\t -------  Guess #{i + 1}  -------\n");
+
+                // Display the number of guesses remaining
+                Console.WriteLine($"You have {4-i} guesses remaining.\n");
 
                 // Display a prompt for the user's guess
                 Console.Write("Enter your guess: ");
@@ -42,7 +47,8 @@ namespace NumberGuessingGame
                 }
                 if (i == 3 && userGuess != secretNumber)
                 {
-                    Console.WriteLine("\t\t\t****************\n\t\t\t** YOU LOSE!! **\n\t\t\t****************");
+                    Console.WriteLine("\t\t\txxxxxxxxxxxxxxxx\n\t\t\txx YOU LOSE!! xx\n\t\t\txxxxxxxxxxxxxxxx");
+                    Console.WriteLine($"\n\t\t    The secret number was {secretNumber}.");
                 }
 
             }
