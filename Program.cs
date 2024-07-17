@@ -12,7 +12,7 @@ namespace NumberGuessingGame
 
             // Display a message to the user
             Console.WriteLine("\t\t\t -------------------------\n\t\t\t   Number Guessing Game!  \n\t\t\t -------------------------");
-            Console.WriteLine("\t\tTry to guess the secret number. (HINT: between 1 and 100)\n");
+            Console.WriteLine("\tTry to guess the secret number. (HINT: whole number 1 through 100)\n");
 
 
             // Give the user four chances to guess the number.
@@ -37,14 +37,33 @@ namespace NumberGuessingGame
                 // Display the user's guess back to the screen (REMOVED IN PHASE 2)
                 // Console.WriteLine($"You guessed: {userGuess}");
 
+                // Display result of guess (right, wrong)
                 if (userGuess == secretNumber) {
                     Console.WriteLine("CORRECT!!! Incredible....how did you know!?\n");
                     Console.WriteLine("\t\t\t****************\n\t\t\t** YOU WIN!!! **\n\t\t\t****************");
                     break;
                 }
                 else{
-                    Console.WriteLine("WRONG!!! I knew my secret number was a good one...\n");
+                    Console.WriteLine("WRONG!!! I knew my secret number was a good one...");
                 }
+
+
+                // Give user too high / too low hints after each attempt
+                if (userGuess > 100 || userGuess < 1)
+                {
+                    Console.Write("Please guess a whole number 1 through 100.153 Learn how to read, ya foo!\n");
+                }
+                else if (userGuess > secretNumber)
+                {
+                    Console.Write("Your guess is too HIGH...\n");
+                }
+                else if (userGuess < secretNumber)
+                {
+                    Console.Write("Your guess is too LOW...\n");
+                }
+
+
+                // Added a FAIL message after final incorrect attempt
                 if (i == 3 && userGuess != secretNumber)
                 {
                     Console.WriteLine("\t\t\txxxxxxxxxxxxxxxx\n\t\t\txx YOU LOSE!! xx\n\t\t\txxxxxxxxxxxxxxxx");
@@ -52,7 +71,8 @@ namespace NumberGuessingGame
                 }
 
             }
-            // Pause to keep the console window open
+
+            // Pause to keep the program open
             Console.ReadLine();
         }
     }
