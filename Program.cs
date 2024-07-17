@@ -47,6 +47,7 @@ namespace NumberGuessingGame
                 if (i == 3 && userGuess != secretNumber)
                 {
                     Console.WriteLine("\t\t\txxxxxxxxxxxxxxxx\n\t\t\txx YOU LOSE!! xx\n\t\t\txxxxxxxxxxxxxxxx");
+                    Console.WriteLine($"\n\t\t\tThe secret number was {secretNumber}.");
                 }
 
             }
