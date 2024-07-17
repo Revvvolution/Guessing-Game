@@ -10,13 +10,16 @@ namespace NumberGuessingGame
             int secretNumber = 42;
 
             // Display a message to the user
-            Console.WriteLine(" -------------------------\n   Number Guessing Game!  \n -------------------------");
-            Console.WriteLine("Try to guess the secret number. (HINT: between 1 and 100)\n");
+            Console.WriteLine("\t\t\t -------------------------\n\t\t\t   Number Guessing Game!  \n\t\t\t -------------------------");
+            Console.WriteLine("\t\tTry to guess the secret number. (HINT: between 1 and 100)\n");
 
 
             // Give the user four chances to guess the number.
             for (int i=0; i<4; i++)
             {
+                // Display the number of the user's current guess
+                Console.WriteLine($"\t\t\t -------  Guess #{i + 1}  -------\n");
+
                 // Display a prompt for the user's guess
                 Console.Write("Enter your guess: ");
 
@@ -31,9 +34,15 @@ namespace NumberGuessingGame
 
                 if (userGuess == secretNumber) {
                     Console.WriteLine("CORRECT!!! Incredible....how did you know!?\n");
+                    Console.WriteLine("\t\t\t****************\n\t\t\t** YOU WIN!!! **\n\t\t\t****************");
+                    break;
                 }
                 else{
                     Console.WriteLine("WRONG!!! I knew my secret number was a good one...\n");
+                }
+                if (i == 3 && userGuess != secretNumber)
+                {
+                    Console.WriteLine("\t\t\t****************\n\t\t\t** YOU LOSE!! **\n\t\t\t****************");
                 }
 
             }
