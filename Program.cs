@@ -51,15 +51,15 @@ namespace NumberGuessingGame
                 // Give user too high / too low hints after each attempt
                 if (userGuess > 100 || userGuess < 1)
                 {
-                    Console.Write("Please guess a whole number 1 through 100.153 Learn how to read, ya foo!\n");
+                    Console.Write("\nYou've wasted your attempt! Please guess a whole number 1 through 100.\n\n");
                 }
                 else if (userGuess > secretNumber)
                 {
-                    Console.Write("Your guess is too HIGH...\n");
+                    Console.Write("\nYour guess is too HIGH...\n\n");
                 }
                 else if (userGuess < secretNumber)
                 {
-                    Console.Write("Your guess is too LOW...\n");
+                    Console.Write("\nYour guess is too LOW...\n\n");
                 }
 
 
