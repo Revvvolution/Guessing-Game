@@ -36,7 +36,7 @@ namespace NumberGuessingGame
             do
             {
                  // Prompting user for a difficulty level to select from
-                Console.Write("\n\t\t Please select a difficulty:\n1 - Easy (eight guesses)\n2 - Medium (six guesses)\n3 - Hard (four guesses)\n");
+                Console.Write("\n\t\t Please select a difficulty:\n1 - Easy (eight guesses)\n2 - Medium (six guesses)\n3 - Hard (four guesses)\n4 - Cheater (unlimited guesses)\n");
                 Console.Write("\nDifficulty Number: ");
                 if (int.TryParse(Console.ReadLine(), out tries))
                 {
@@ -51,6 +51,9 @@ namespace NumberGuessingGame
                         case 3:
                             Game(4);
                             break;
+                        case 4:
+                            CheaterGame();
+                            break;
                         default:
                             Console.WriteLine("Please make a valid selection.");
                             break;
@@ -60,74 +63,115 @@ namespace NumberGuessingGame
                 {
                     Console.WriteLine("Please enter a number from the given choices.");
                 }
-            } while (tries < 1 || tries > 3);
+            } while (tries < 1 || tries > 4);
 
 
 
 // ****************************   MAIN GAME LOOP   ****************************
 
-        static void Game(int totalTries)
-        {
-            // Give the user selected chances to guess the number.
-            for (int i = 0; i < totalTries; i++)
+            static void Game(int totalTries)
             {
-
-                // Display the number of the user's current guess
-                Console.WriteLine($"\t\t\t -------  Guess #{i + 1}  -------\n");
-
-                // Display the number of guesses remaining
-                Console.WriteLine($"You have {totalTries-i} guesses remaining.\n");
-
-                // Display a prompt for the user's guess
-                Console.Write("Enter your guess: ");
-
-                // Take the user's guess as input and save it as a variable
-                string userInput = Console.ReadLine() ?? string.Empty;  // ?? = null-coalescing operator (to fix error message from phase 1)
-
-                // Convert the user input to an integer
-                int userGuess = int.Parse(userInput!);  // ! = null-forgiving operator (to fix error message from phase 1)
-
-                // Display the user's guess back to the screen (REMOVED IN PHASE 2)
-                // Console.WriteLine($"You guessed: {userGuess}");
-
-                // Display result of guess (right, wrong)
-                if (userGuess == SecretNumber) {
-                    Console.WriteLine("CORRECT!!! Incredible....how did you know!?\n");
-                    Console.WriteLine("\t\t\t****************\n\t\t\t** YOU WIN!!! **\n\t\t\t****************");
-                    break;
-                }
-                else{
-                    Console.WriteLine("WRONG!!! I knew my secret number was a good one...");
-                }
-
-
-                // Give user too high / too low hints after each attempt
-                if (userGuess > 100 || userGuess < 1)
+                // Give the user selected chances to guess the number.
+                for (int i = 0; i < totalTries; i++)
                 {
-                    Console.Write("\nYou've wasted your attempt! Please guess a whole number 1 through 100.\n\n");
-                }
-                else if (userGuess > SecretNumber)
-                {
-                    Console.Write("\nYour guess is too HIGH...\n\n");
-                }
-                else if (userGuess < SecretNumber)
-                {
-                    Console.Write("\nYour guess is too LOW...\n\n");
-                }
+
+                    // Display the number of the user's current guess
+                    Console.WriteLine($"\t\t\t -------  Guess #{i + 1}  -------\n");
+
+                    // Display the number of guesses remaining
+                    Console.WriteLine($"You have {totalTries-i} guesses remaining.\n");
+
+                    // Display a prompt for the user's guess
+                    Console.Write("Enter your guess: ");
+
+                    // Take the user's guess as input and save it as a variable
+                    string userInput = Console.ReadLine() ?? string.Empty;  // ?? = null-coalescing operator (to fix error message from phase 1)
+
+                    // Convert the user input to an integer
+                    int userGuess = int.Parse(userInput!);  // ! = null-forgiving operator (to fix error message from phase 1)
+
+                    // Display the user's guess back to the screen (REMOVED IN PHASE 2)
+                    // Console.WriteLine($"You guessed: {userGuess}");
+
+                    // Display result of guess (right, wrong)
+                    if (userGuess == SecretNumber) {
+                        Console.WriteLine("CORRECT!!! Incredible....how did you know!?\n");
+                        Console.WriteLine("\t\t\t****************\n\t\t\t** YOU WIN!!! **\n\t\t\t****************");
+                        break;
+                    }
+                    else{
+                        Console.WriteLine("WRONG!!! I knew my secret number was a good one...");
+                    }
 
 
-                // Added a FAIL message after final incorrect attempt
-                if (i == totalTries-1 && userGuess != SecretNumber)
-                {
-                    Console.WriteLine("\t\t\txxxxxxxxxxxxxxxx\n\t\t\txx YOU LOSE!! xx\n\t\t\txxxxxxxxxxxxxxxx");
-                    Console.WriteLine($"\n\t\t    The secret number was {SecretNumber}.");
+                    // Give user too high / too low hints after each attempt
+                    if (userGuess > 100 || userGuess < 1)
+                    {
+                        Console.Write("\nYou've wasted your attempt! Please guess a whole number 1 through 100.\n\n");
+                    }
+                    else if (userGuess > SecretNumber)
+                    {
+                        Console.Write("\nYour guess is too HIGH...\n\n");
+                    }
+                    else if (userGuess < SecretNumber)
+                    {
+                        Console.Write("\nYour guess is too LOW...\n\n");
+                    }
+
+
+                    // Added a FAIL message after final incorrect attempt
+                    if (i == totalTries-1 && userGuess != SecretNumber)
+                    {
+                        Console.WriteLine("\t\t\txxxxxxxxxxxxxxxx\n\t\t\txx YOU LOSE!! xx\n\t\t\txxxxxxxxxxxxxxxx");
+                        Console.WriteLine($"\n\t\t    The secret number was {SecretNumber}.");
+                    }
+
                 }
 
+                // Pause to keep the program open
+                Console.ReadLine();
             }
 
-            // Pause to keep the program open
-            Console.ReadLine();
-          }
+
+            // Adding Cheater Game Logic
+            static void CheaterGame()
+            {
+                            Console.WriteLine("\n\t\t\t -------  Cheater Mode  -------\n");
+                Console.WriteLine("You are in Cheater Mode! Keep guessing until you get it right.\n");
+
+                while (true)
+                {
+                    Console.Write("Enter your guess: ");
+                    string userInput = Console.ReadLine() ?? string.Empty;
+                    int userGuess = int.Parse(userInput!);
+
+                    if (userGuess == SecretNumber)
+                    {
+                        Console.WriteLine("CORRECT!!! Incredible....how did you know!?\n");
+                        Console.WriteLine("\t\t\t****************\n\t\t\t** YOU WIN!!! **\n\t\t\t****************");
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("WRONG!!! I knew my secret number was a good one...");
+                    }
+
+                    if (userGuess > 100 || userGuess < 1)
+                    {
+                        Console.Write("\nYou've wasted your attempt! Please guess a whole number 1 through 100.\n\n");
+                    }
+                    else if (userGuess > SecretNumber)
+                    {
+                        Console.Write("\nYour guess is too HIGH...\n\n");
+                    }
+                    else if (userGuess < SecretNumber)
+                    {
+                        Console.Write("\nYour guess is too LOW...\n\n");
+                    }
+                }
+                                // Pause to keep the program open
+                Console.ReadLine();
+            }
         }
     }
 }
