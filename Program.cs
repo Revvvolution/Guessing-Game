@@ -68,7 +68,7 @@ namespace NumberGuessingGame
 
         static void Game(int totalTries)
         {
-            // Give the user four chances to guess the number.
+            // Give the user selected chances to guess the number.
             for (int i = 0; i < totalTries; i++)
             {
 
